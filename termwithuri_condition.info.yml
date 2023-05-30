@@ -1,0 +1,8 @@
+name: Has Term with URI Condition
+type: module
+description: This module provide Node/Media has term with URI conditions
+core_version_requirement: ^9 || ^10
+package: Other
+dependencies:
+  - drupal:taxonomy
+
