@@ -177,6 +177,7 @@ class NodeHasTerm extends ConditionPluginBase implements ContainerFactoryPluginI
       }
 
       foreach ($field_names as $field_name) {
+        /** @var \Drupal\taxonomy\TermInterface $entity */
         if ($entity->hasField($field_name) && !$entity->get($field_name)->isEmpty()) {
            return TRUE;
         }

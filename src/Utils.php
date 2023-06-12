@@ -5,6 +5,9 @@ namespace Drupal\termwithuri_condition;
 use Drupal\media\MediaInterface;
 use Drupal\taxonomy\TermInterface;
 
+/**
+ * Utilities file.
+ */
 class Utils {
 
   const EXTERNAL_URI_FIELD = 'field_external_uri';
@@ -14,7 +17,6 @@ class Utils {
   const MEDIA_USAGE_FIELD = 'field_media_use';
   const MEMBER_OF_FIELD = 'field_member_of';
   const MODEL_FIELD = 'field_model';
-
 
   /**
    * Gets the taxonomy term associated with an external uri.
@@ -32,8 +34,7 @@ class Utils {
    */
   public static function getTermForUri($uri) {
     // Get authority link fields to search.
-
-    $field_map = \Drupal::service('entity_field.manager')->getFieldMap();;
+    $field_map = \Drupal::service('entity_field.manager')->getFieldMap();
     $fields = [];
     foreach ($field_map['taxonomy_term'] as $field_name => $field_data) {
       if ($field_data['type'] == 'authority_link') {
@@ -51,6 +52,7 @@ class Utils {
     }
 
     $results = $query
+      ->accessCheck(TRUE)
       ->condition($orGroup)
       ->execute();
 
@@ -131,14 +133,15 @@ class Utils {
     if ($field->isEmpty()) {
       return NULL;
     }
-    $parent = $field->first()
-      ->get('entity')
-      ->getTarget();
+
+    /** @var \Drupal\Core\TypedData\DataReferenceInterface $media_of_reference */
+    $media_of_reference = $field->first()
+      ->get('entity');
+    $parent = $media_of_reference->getTarget();
     if (!is_null($parent)) {
       return $parent->getValue();
     }
     return NULL;
   }
-
 
 }

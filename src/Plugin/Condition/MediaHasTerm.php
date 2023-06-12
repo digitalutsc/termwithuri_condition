@@ -16,7 +16,7 @@ namespace Drupal\termwithuri_condition\Plugin\Condition;
 class MediaHasTerm extends NodeHasTerm {
 
   /**
-   * {@inheritdoc}utils->
+   * {@inheritdoc}
    */
   public function evaluate() {
     if (empty($this->configuration['uri']) && !$this->isNegated()) {

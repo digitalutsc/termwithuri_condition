@@ -3,13 +3,6 @@
 namespace Drupal\termwithuri_condition\Plugin\EntityReferenceSelection;
 
 use Drupal\taxonomy\Plugin\EntityReferenceSelection\TermSelection;
-use Drupal\islandora\IslandoraUtils;
-use Drupal\Core\Entity\EntityFieldManagerInterface;
-use Drupal\Core\Entity\EntityRepositoryInterface;
-use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\termwithuri_condition\Utils;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -25,52 +18,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * )
  */
 class ExternalUriSelection extends TermSelection {
-
-  /**
-   * Constructs a new ExternalUriSelection object.
-   *
-   * @param array $configuration
-   *   A configuration array containing information about the plugin instance.
-   * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   The entity manager service.
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
-   *   The module handler service.
-   * @param \Drupal\Core\Session\AccountInterface $current_user
-   *   The current user.
-   * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager
-   *   The entity field manager.
-   * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
-   *   The entity type bundle info service.
-   * @param \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
-   *   The entity repository.
-   */
-  public function __construct(
-    array $configuration,
-    $plugin_id,
-    $plugin_definition,
-    EntityTypeManagerInterface $entity_type_manager,
-    ModuleHandlerInterface $module_handler,
-    AccountInterface $current_user,
-    EntityFieldManagerInterface $entity_field_manager = NULL,
-    EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL,
-    EntityRepositoryInterface $entity_repository = NULL
-  ) {
-    parent::__construct(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $entity_type_manager,
-      $module_handler,
-      $current_user,
-      $entity_field_manager,
-      $entity_type_bundle_info,
-      $entity_repository
-    );
-  }
 
   /**
    * {@inheritdoc}

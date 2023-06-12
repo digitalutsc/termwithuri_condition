@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains termwithuri_condition.module.
+ */
+
 use Drupal\Core\Form\FormStateInterface;
 
 /**
