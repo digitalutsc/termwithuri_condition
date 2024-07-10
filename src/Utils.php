@@ -4,6 +4,7 @@ namespace Drupal\termwithuri_condition;
 
 use Drupal\media\MediaInterface;
 use Drupal\taxonomy\TermInterface;
+use Drupal\node\NodeInterface;
 
 /**
  * Utilities file.
@@ -110,6 +111,31 @@ class Utils {
       }
     }
     return NULL;
+  }
+
+  /**
+   * Get array of media ids that have fields that reference $node and $term.
+   *
+   * @param \Drupal\node\NodeInterface $node
+   *   The node to reference.
+   * @param \Drupal\taxonomy\TermInterface $term
+   *   The term to reference.
+   *
+   * @return array|int|null
+   *   Array of media IDs or NULL.
+   */
+  public static function getMediaReferencingNodeAndTerm(NodeInterface $node, TermInterface $term) {
+    $media_collection = [];
+    $medias = $node->get('field_islandora_object_media')->referencedEntities();
+    foreach ($medias as $media) {
+      $media_uses = $media->get('field_media_use')->referencedEntities();
+      foreach ($media_uses as $media_use) {
+        if ($media_use->id() == $term->id()) {
+          $media_collection[] = $media->id();
+        }
+      }
+    }
+    return $media_collection;
   }
 
   /**
