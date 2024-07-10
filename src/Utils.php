@@ -19,6 +19,8 @@ class Utils {
   const MEMBER_OF_FIELD = 'field_member_of';
   const MODEL_FIELD = 'field_model';
 
+  const NODE_MEDIA_FIELD = 'field_islandora_object_media';
+
   /**
    * Gets the taxonomy term associated with an external uri.
    *
@@ -125,10 +127,19 @@ class Utils {
    *   Array of media IDs or NULL.
    */
   public static function getMediaReferencingNodeAndTerm(NodeInterface $node, TermInterface $term) {
+    if (!$node || !$term) {
+      return NULL;
+    }
+    if (!$node->hasField(self::NODE_MEDIA_FIELD)) {
+      return NULL;
+    }
     $media_collection = [];
-    $medias = $node->get('field_islandora_object_media')->referencedEntities();
+    $medias = $node->get(self::NODE_MEDIA_FIELD)->referencedEntities();
     foreach ($medias as $media) {
-      $media_uses = $media->get('field_media_use')->referencedEntities();
+      if (!$media->hasField(self::MEDIA_USAGE_FIELD)) {
+        return NULL;
+      }
+      $media_uses = $media->get(self::MEDIA_USAGE_FIELD)->referencedEntities();
       foreach ($media_uses as $media_use) {
         if ($media_use->id() == $term->id()) {
           $media_collection[] = $media->id();
