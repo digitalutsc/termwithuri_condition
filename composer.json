@@ -1,5 +1,8 @@
 {
   "name": "islandora_lite/termwithuri_condition",
   "type": "drupal-module",
-  "description": "This module provide Node/Media has term with URI conditions"
+  "description": "This module provide Node/Media has term with URI conditions",
+  "require": {
+    "drupal/core": "^10 || ^11"
+  }
 }
