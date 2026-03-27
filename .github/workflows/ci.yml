@@ -9,7 +9,7 @@ on:
 
 jobs:
   drupal-module-ci:
-    uses: digitalutsc/reusable_workflows/.github/workflows/drupal-module-ci.yml@main
+    uses: digitalutsc/reusable_workflows/.github/workflows/islandora-module-ci.yml@main
     with:
       module_name: termwithuri_condition
       install_chromedriver: false
